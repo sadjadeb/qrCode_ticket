@@ -1,0 +1,68 @@
+img {
+  max-width: 100%;
+  max-height: 100%;
+  height: auto;
+}
+
+body {
+  background-color: #eee;
+  direction: rtl;
+}
+
+.main {
+  max-width: 500px;
+  margin: 40px auto;
+  background-color: #fff;
+  border-radius: 4px;
+  padding: 20px 30px;
+}
+
+.logo {
+  height: 60px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.qrcode {
+  width: 120px;
+  height: 120px;
+  background-color: #eee;
+  margin: 15px auto 25px;
+}
+
+.title {
+  font-size: 1rem;
+  text-align: center;
+  color: #444;
+}
+
+.subtitle {
+  font-size: .9rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+.desc {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  max-width: 300px;
+  margin: 25px auto;
+}
+
+.desc dt {
+  width: 50%;
+  text-align: right;
+  font-weight: normal;
+  color: #444;
+}
+
+.desc dd {
+  width: 50%;
+  text-align: left;
+  font-weight: bold;
+}
+/*# sourceMappingURL=style.css.map */

@@ -1,0 +1,56 @@
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>یلدا</title>
+
+	<link rel="stylesheet" href="static/css/bootstrap-reboot.rtl.min.css">
+	<link rel="stylesheet" href="static/css/bootstrap-grid.rtl.min.css">
+	<link rel="stylesheet" href="static/css/bootstrap-utilities.rtl.min.css">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+	<div class="main">
+		<div class="row justify-content-between align-items-center">
+			<div class="col-4">
+				<div class="logo">
+					<img src="static/img/csce.png" alt="انجمن علمی کامپیوتر">
+				</div>
+			</div>
+			<div class="col-4">
+				<div class="logo ms-auto">
+					<img src="static/img/fum.png" alt="دانشگاه فردوسی">
+				</div>
+			</div>
+		</div>
+		<div id="qrcode" class="qrcode">
+
+		</div>
+
+		<h1 class="title">بلیط ورود به جشن یلدا</h1>
+		<h1 class="subtitle">سجاد ابراهیمی</h1>
+
+		<dl class="desc">
+			<dt>تاریخ تولد</dt>
+			<dd>۱۳۷۷/۱۲/۰۸</dd>
+
+			<dt>تاریخ تولد</dt>
+			<dd>۱۳۷۷/۱۲/۰۸</dd>
+
+			<dt>تاریخ تولد</dt>
+			<dd>۱۳۷۷/۱۲/۰۸</dd>
+		</dl>
+	</div>
+	
+	<script src="static/js/jquery-3.6.0.min.js"></script>
+	<script src="static/js/qrcode.min.js"></script>
+
+	<script type="text/javascript">
+		new QRCode(document.getElementById("qrcode"), {
+			text: "https://sadjadbesadjat.ir"
+		});
+	</script>
+</body>
+</html>
