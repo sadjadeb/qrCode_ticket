@@ -3,7 +3,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>یلدا</title>
+	<title>انجمن کامپیوتر</title>
 
 	<link rel="stylesheet" href="static/css/bootstrap-reboot.rtl.min.css">
 	<link rel="stylesheet" href="static/css/bootstrap-grid.rtl.min.css">
@@ -31,10 +31,10 @@
 
 		const reserveTicket = ticket_id => {
 			return $.get(`${BASE_URL}/ticket/${ticket_id}/reserve?password=${getPassword()}`).then(res => {
-				alert(`میهمان ${res.first_name} ${res.last_name} با کد بلیط ${ticket_id} وارد شد.`);
+				alert(`میهمان ${res.first_name} ${res.last_name} با کد بلیت ${ticket_id} وارد شد.`);
 				return res;
 			}).fail(res => {
-				alert('خطا در رزرو بلیط');
+				alert('خطا در رزرو بلیت');
 			})
 		}
 
@@ -43,9 +43,6 @@
 			return parts[parts.length-1]
 		}
 		const onScanSuccess = (decodedText, decodedResult) => {
-			// Handle on success condition with the decoded text or result.
-			// console.log(`Scan result: ${decodedText}`, decodedResult);
-			
 			const ticket_id = getTicketIdFromURL(decodedText)
 
 			if (ticket_id) {
