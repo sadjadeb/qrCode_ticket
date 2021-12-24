@@ -1,9 +1,20 @@
 from config import *
 from excel_handler import get_users_from_excel
-from fastapi import FastAPI, HTTPException, Request
+from fastapi import FastAPI, HTTPException, Request, status
+from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
 app = FastAPI()
+
+origins = ["*"]
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
 users = get_users_from_excel(INPUT_FILE_PATH)
 
 
@@ -28,8 +39,8 @@ async def read_items(ticket_id: int):
     for user in users:
         if user['ticket_id'] == ticket_id:
             return user
-    return {"message": "User not found"}
+    raise HTTPException(status_code=404, detail="User Not Found")
 
 
 def run_server():
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="127.0.0.1", port=8000)

@@ -56,3 +56,20 @@ body {
 		font-weight: bold;
 	}
 }
+
+.error-msg {
+	text-align: center;
+	background-color: rgba($color: #ff4500, $alpha: .05);
+	color: #ff4500;
+	padding: 10px 15px;
+	display: none;
+}
+
+.main.error {
+	* {
+		display: none;
+	}
+	.error-msg {
+		display: block;
+	}
+}

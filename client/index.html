@@ -30,27 +30,53 @@
 		</div>
 
 		<h1 class="title">بلیط ورود به جشن یلدا</h1>
-		<h1 class="subtitle">سجاد ابراهیمی</h1>
+		<h2 id="user-name" class="subtitle"></h2>
 
 		<dl class="desc">
-			<dt>تاریخ تولد</dt>
-			<dd>۱۳۷۷/۱۲/۰۸</dd>
 
-			<dt>تاریخ تولد</dt>
-			<dd>۱۳۷۷/۱۲/۰۸</dd>
+			<dt>شماره بلیط</dt>
+			<dd id="ticket-id"></dd>
 
-			<dt>تاریخ تولد</dt>
-			<dd>۱۳۷۷/۱۲/۰۸</dd>
+			<dt>تلفن همراه</dt>
+			<dd id="phone-number"></dd>
+
+			<!-- <dt>شماره دانشجویی</dt>
+			<dd id="student-id"></dd> -->
 		</dl>
+
+		<div class="error-msg">
+			لینک وارد شده نامعتبر است.
+		</div>
 	</div>
 	
 	<script src="static/js/jquery-3.6.0.min.js"></script>
 	<script src="static/js/qrcode.min.js"></script>
+	<script src="static/js/script.js"></script>
 
 	<script type="text/javascript">
-		new QRCode(document.getElementById("qrcode"), {
-			text: "https://sadjadbesadjat.ir"
-		});
+
+		const BASE_URL = "http://127.0.0.1:8000";
+
+		function get_ticket(ticket_id) {
+			return $.get(`${BASE_URL}/ticket/${ticket_id}`).then(res => {
+				$("#user-name").html(`${res.first_name} ${res.last_name}`);
+				$("#ticket-id").html(`SC-${res.ticket_id}`);
+				$("#phone-number").html(res.phone_number);
+				return res;
+			})
+		}
+
+		$(() => {
+			var urlParams = new URLSearchParams(window.location.search);
+			if(urlParams.has('ticket_id')) {
+				const ticket_id = urlParams.get('ticket_id');
+				get_ticket(ticket_id).then(res => {
+					new QRCode(document.getElementById("qrcode"), ticket_id);
+				}).fail(err => {
+					$(".main").addClass('error');
+				})
+			}
+		})
 	</script>
 </body>
 </html>

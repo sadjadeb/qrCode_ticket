@@ -65,4 +65,20 @@ body {
   text-align: left;
   font-weight: bold;
 }
+
+.error-msg {
+  text-align: center;
+  background-color: rgba(255, 69, 0, 0.05);
+  color: #ff4500;
+  padding: 10px 15px;
+  display: none;
+}
+
+.main.error * {
+  display: none;
+}
+
+.main.error .error-msg {
+  display: block;
+}
 /*# sourceMappingURL=style.css.map */
