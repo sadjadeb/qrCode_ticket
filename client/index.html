@@ -71,7 +71,7 @@
 			if(urlParams.has('ticket_id')) {
 				const ticket_id = urlParams.get('ticket_id');
 				get_ticket(ticket_id).then(res => {
-					new QRCode(document.getElementById("qrcode"), ticket_id);
+					new QRCode(document.getElementById("qrcode"), `${BASE_URL}/reception/${ticket_id}`);
 				}).fail(err => {
 					$(".main").addClass('error');
 				})
