@@ -3,7 +3,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>یلدا</title>
+	<title>انجمن کامپیوتر</title>
 
 	<link rel="stylesheet" href="static/css/bootstrap-reboot.rtl.min.css">
 	<link rel="stylesheet" href="static/css/bootstrap-grid.rtl.min.css">
@@ -16,12 +16,12 @@
 		<div class="row justify-content-between align-items-center">
 			<div class="col-4">
 				<div class="logo">
-					<img src="static/img/csce.png" alt="انجمن علمی کامپیوتر">
+					<img src="static/img/ssces.png" alt="انجمن علمی کامپیوتر">
 				</div>
 			</div>
 			<div class="col-4">
 				<div class="logo ms-auto">
-					<img src="static/img/fum.png" alt="دانشگاه فردوسی">
+					<img src="static/img/fum.png" alt="دانشگاه فردوسی مشهد">
 				</div>
 			</div>
 		</div>
@@ -29,12 +29,12 @@
 
 		</div>
 
-		<h1 class="title">بلیط ورود به جشن یلدا</h1>
+		<h1 class="title">دورهمی صمیمانه دانشجویان و اساتید گروه کامپیوتر</h1>
 		<h2 id="user-name" class="subtitle"></h2>
 
 		<dl class="desc">
 
-			<dt>شماره بلیط</dt>
+			<dt>شماره بلیت</dt>
 			<dd id="ticket-id"></dd>
 
 			<dt>تلفن همراه</dt>
@@ -60,7 +60,7 @@
 		function get_ticket(ticket_id) {
 			return $.get(`${BASE_URL}/ticket/${ticket_id}`).then(res => {
 				$("#user-name").html(`${res.first_name} ${res.last_name}`);
-				$("#ticket-id").html(`SC-${res.ticket_id}`);
+				$("#ticket-id").html(`${res.ticket_id}`);
 				$("#phone-number").html(res.phone_number);
 				return res;
 			})
