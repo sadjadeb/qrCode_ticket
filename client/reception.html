@@ -1,0 +1,64 @@
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>یلدا</title>
+
+	<link rel="stylesheet" href="static/css/bootstrap-reboot.rtl.min.css">
+	<link rel="stylesheet" href="static/css/bootstrap-grid.rtl.min.css">
+	<link rel="stylesheet" href="static/css/bootstrap-utilities.rtl.min.css">
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+	<div class="main">
+		<input id="password" class="form-control w-100 mb-3" type="text" placeholder="رمز عبور ادمین">
+		<button class="btn mb-3" onclick="startQRScanner()">تایید و بازکردن qrScanner</button>
+		<div id="reader"></div>
+	</div>
+	
+	<script src="static/js/jquery-3.6.0.min.js"></script>
+	<script src="static/js/qrcode.min.js"></script>
+	<script src="static/js/html5-qrcode.min.js"></script>
+	<script src="static/js/script.js"></script>
+
+	<script type="text/javascript">
+
+		const getPassword = () => {
+			return $("#password").val();r
+		}
+
+		const reserveTicket = ticket_id => {
+			return $.get(`${BASE_URL}/ticket/${ticket_id}/reserve?password=${getPassword()}`).then(res => {
+				alert(`میهمان ${res.first_name} ${res.last_name} با کد بلیط ${ticket_id} وارد شد.`);
+				return res;
+			}).fail(res => {
+				alert('خطا در رزرو بلیط');
+			})
+		}
+
+		const getTicketIdFromURL = url => {
+			const parts = url.split("/");
+			return parts[parts.length-1]
+		}
+		const onScanSuccess = (decodedText, decodedResult) => {
+			// Handle on success condition with the decoded text or result.
+			// console.log(`Scan result: ${decodedText}`, decodedResult);
+			
+			const ticket_id = getTicketIdFromURL(decodedText)
+
+			if (ticket_id) {
+				reserveTicket(ticket_id)
+			}
+		}
+
+		const startQRScanner = () => {
+			var html5QrcodeScanner = new Html5QrcodeScanner(
+				"reader", { fps: 10, qrbox: 250 });
+			html5QrcodeScanner.render(onScanSuccess);
+		}
+
+	</script>
+</body>
+</html>
