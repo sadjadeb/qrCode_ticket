@@ -1,6 +1,6 @@
 from config import *
 from excel_handler import get_users_from_excel
-from fastapi import FastAPI, HTTPException, Request, status
+from fastapi import FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
@@ -18,19 +18,12 @@ app.add_middleware(
 users = get_users_from_excel(INPUT_FILE_PATH)
 
 
-def authenticate(args):
-    if args['password'] != ADMIN_PASSWORD:
-        raise HTTPException(status_code=400, detail='Incorrect password')
-
-
 @app.get("/ticket/all")
-async def read_all_items(args: Request):
-    try:
-        args = await args.json()
-    except:
-        return {"message": "Please provide a password"}
-
-    authenticate(args)
+async def read_all_items(password: str):
+    if password is None:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Password Not Found")
+    if password != ADMIN_PASSWORD:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Incorrect password")
     return users
 
 
