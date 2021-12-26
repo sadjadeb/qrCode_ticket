@@ -15,7 +15,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-users = get_users_from_excel(INPUT_FILE_PATH)
+users = get_users_from_excel(OUTPUT_FILE_PATH)
 
 
 def has_permission(password: str):
