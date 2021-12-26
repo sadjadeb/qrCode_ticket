@@ -53,7 +53,7 @@
 
 	<script type="text/javascript">
 
-		const BASE_URL = "http://127.0.0.1:8000";
+		const BASE_URL = "http://213.233.179.160:8000";
 
 		function get_ticket(ticket_id) {
 			return $.get(`${BASE_URL}/ticket/${ticket_id}`).then(res => {
@@ -69,7 +69,11 @@
 			if(urlParams.has('ticket_id')) {
 				const ticket_id = urlParams.get('ticket_id');
 				get_ticket(ticket_id).then(res => {
-					new QRCode(document.getElementById("qrcode"), `${BASE_URL}/reception/${ticket_id}`);
+					new QRCode(document.getElementById("qrcode"), {
+						text: `${BASE_URL}/reception/${ticket_id}`,
+						width: 120,
+						height: 120
+					});
 				}).fail(err => {
 					$(".main").addClass('error');
 				})
