@@ -18,13 +18,19 @@ app.add_middleware(
 users = get_users_from_excel(INPUT_FILE_PATH)
 
 
-@app.get("/ticket/all")
-async def read_all_items(password: str):
+def has_permission(password: str):
     if password is None:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Password Not Found")
     if password != ADMIN_PASSWORD:
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Incorrect password")
-    return users
+    else:
+        return True
+
+
+@app.get("/ticket/all")
+async def read_all_items(password: str):
+    if has_permission(password):
+        return users
 
 
 @app.get("/ticket/{ticket_id}")
@@ -35,5 +41,19 @@ async def read_items(ticket_id: int):
     raise HTTPException(status_code=404, detail="User Not Found")
 
 
+@app.get("/reception/{ticket_id}")
+async def verify_ticket(ticket_id: int, password: str):
+    if has_permission(password):
+        for user in users:
+            if user['ticket_id'] == ticket_id:
+                return {'verified': True}
+
+
+@app.get("/camera")
+async def has_camera_permission(password: str):
+    if has_permission(password):
+        return {'has_camera_perm': True}
+
+
 def run_server():
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    uvicorn.run(app, host="0.0.0.0", port=8000)
