@@ -51,9 +51,24 @@
 		}
 
 		const startQRScanner = () => {
-			var html5QrcodeScanner = new Html5QrcodeScanner(
-				"reader", { fps: 10, qrbox: 250 });
-			html5QrcodeScanner.render(onScanSuccess);
+			// return  $.get(`${BASE_URL}/camera?password=${getPassword()}`).then(res => {
+			// 	if (res.has_camera) {
+			// 		var html5QrcodeScanner = new Html5QrcodeScanner(
+			// 				"reader", {fps: 10, qrbox: 250});
+			// 		html5QrcodeScanner.render(onScanSuccess);
+			// 	}
+			//  	else {
+			// 		alert('لطفا رمز عبور را وارد کنید');
+			// 	}
+			// });
+				if (getPassword()) {
+					var html5QrcodeScanner = new Html5QrcodeScanner(
+							"reader", {fps: 10, qrbox: 250});
+					html5QrcodeScanner.render(onScanSuccess);
+				}
+			 	else {
+					alert('لطفا رمز عبور را وارد کنید');
+				}
 		}
 
 	</script>
