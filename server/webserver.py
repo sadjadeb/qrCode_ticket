@@ -1,5 +1,5 @@
-from config import *
-from excel_handler import get_users_from_excel
+from server.config import *
+from server.excel_handler import get_users_from_excel
 from fastapi import FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
