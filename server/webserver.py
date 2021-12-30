@@ -1,11 +1,17 @@
 from server.config import *
 from server.excel_handler import get_users_from_excel
-from fastapi import FastAPI, HTTPException, status
+from fastapi import FastAPI, HTTPException, status, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.templating import Jinja2Templates
 from typing import Optional
 import uvicorn
 
 app = FastAPI()
+
+app.mount("/static", StaticFiles(directory="client/static"), name="static")
+templates = Jinja2Templates(directory="client")
 
 origins = ["*"]
 app.add_middleware(
@@ -19,6 +25,7 @@ app.add_middleware(
 users = get_users_from_excel(OUTPUT_FILE_PATH)
 users_entrance = {}
 
+
 def has_permission(password: str):
     if password is None:
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST, detail="Password required")
@@ -26,6 +33,15 @@ def has_permission(password: str):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail="Incorrect password")
     else:
         return True
+
+
+@app.get("/", response_class=HTMLResponse)
+async def root(request: Request, ticket_id: int):
+    return templates.TemplateResponse("index.html", {"request": request,
+                                                     "ticket_id": ticket_id,
+                                                     "base_url": DOMAIN_NAME,
+                                                     "page_title": PAGE_TITLE,
+                                                     "event_name": EVENT_NAME})
 
 
 @app.get("/ticket/all")

@@ -1,6 +1,6 @@
 /.idea/
 /venv/
-/__pycache__/
+/server/__pycache__/
 /server/config.py
 /sample_users.xlsx
 /users.xlsx
