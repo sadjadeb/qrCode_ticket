@@ -3,7 +3,7 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>انجمن کامپیوتر</title>
+	<title>{{ page_title }}</title>
 
 	<link rel="stylesheet" href="static/css/bootstrap-reboot.rtl.min.css">
 	<link rel="stylesheet" href="static/css/bootstrap-grid.rtl.min.css">
@@ -51,24 +51,14 @@
 		}
 
 		const startQRScanner = () => {
-			// return  $.get(`${BASE_URL}/camera?password=${getPassword()}`).then(res => {
-			// 	if (res.has_camera) {
-			// 		var html5QrcodeScanner = new Html5QrcodeScanner(
-			// 				"reader", {fps: 10, qrbox: 250});
-			// 		html5QrcodeScanner.render(onScanSuccess);
-			// 	}
-			//  	else {
-			// 		alert('لطفا رمز عبور را وارد کنید');
-			// 	}
-			// });
-				if (getPassword()) {
-					var html5QrcodeScanner = new Html5QrcodeScanner(
-							"reader", {fps: 10, qrbox: 250});
-					html5QrcodeScanner.render(onScanSuccess);
-				}
-			 	else {
-					alert('لطفا رمز عبور را وارد کنید');
-				}
+			if (getPassword()) {
+				var html5QrcodeScanner = new Html5QrcodeScanner(
+						"reader", {fps: 10, qrbox: 250});
+				html5QrcodeScanner.render(onScanSuccess);
+			}
+			else {
+				alert('لطفا رمز عبور را وارد کنید');
+			}
 		}
 
 	</script>

@@ -58,6 +58,12 @@ async def read_items(ticket_id: int):
     raise HTTPException(status_code=404, detail="User Not Found")
 
 
+@app.get("/reception", response_class=HTMLResponse)
+async def reception_page(request: Request):
+    return templates.TemplateResponse("reception.html", {"request": request,
+                                                         "page_title": PAGE_TITLE})
+
+
 @app.get("/reception/{ticket_id}")
 async def verify_ticket(ticket_id: int, password: Optional[str] = None):
     if has_permission(password):
