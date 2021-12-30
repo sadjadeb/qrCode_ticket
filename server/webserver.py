@@ -17,7 +17,7 @@ app.add_middleware(
 )
 
 users = get_users_from_excel(OUTPUT_FILE_PATH)
-
+users_entrance = {}
 
 def has_permission(password: str):
     if password is None:
@@ -47,7 +47,16 @@ async def verify_ticket(ticket_id: int, password: Optional[str] = None):
     if has_permission(password):
         for user in users:
             if user['ticket_id'] == ticket_id:
-                return {'verified': True}
+                if ticket_id in users_entrance:
+                    users_entrance[ticket_id] += 1
+                else:
+                    users_entrance[ticket_id] = 1
+
+                return {
+                    'first_name': user['first_name'],
+                    'last_name': user['last_name'],
+                    'entrance_count': users_entrance[ticket_id]
+                }
 
 
 @app.get("/camera")
