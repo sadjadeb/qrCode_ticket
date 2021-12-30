@@ -8,7 +8,7 @@
 	<link rel="stylesheet" href="static/css/bootstrap-reboot.rtl.min.css">
 	<link rel="stylesheet" href="static/css/bootstrap-grid.rtl.min.css">
 	<link rel="stylesheet" href="static/css/bootstrap-utilities.rtl.min.css">
-	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="static/css/style.css">
 </head>
 <body>
 
@@ -53,7 +53,7 @@
 
 	<script type="text/javascript">
 
-		const BASE_URL = "http://213.233.179.160:8000";
+		const BASE_URL = "http://127.0.0.1:8000";
 
 		function get_ticket(ticket_id) {
 			return $.get(`${BASE_URL}/ticket/${ticket_id}`).then(res => {
