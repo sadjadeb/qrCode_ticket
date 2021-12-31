@@ -5,10 +5,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{{ page_title }}</title>
 
-	<link rel="stylesheet" href="static/css/bootstrap-reboot.rtl.min.css">
-	<link rel="stylesheet" href="static/css/bootstrap-grid.rtl.min.css">
-	<link rel="stylesheet" href="static/css/bootstrap-utilities.rtl.min.css">
-	<link rel="stylesheet" href="static/css/style.css">
+	<link rel="stylesheet" href="/static/css/bootstrap-reboot.rtl.min.css">
+	<link rel="stylesheet" href="/static/css/bootstrap-grid.rtl.min.css">
+	<link rel="stylesheet" href="/static/css/bootstrap-utilities.rtl.min.css">
+	<link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
 
@@ -18,12 +18,14 @@
 		<div id="reader"></div>
 	</div>
 	
-	<script src="static/js/jquery-3.6.0.min.js"></script>
-	<script src="static/js/qrcode.min.js"></script>
-	<script src="static/js/html5-qrcode.min.js"></script>
-	<script src="static/js/script.js"></script>
+	<script src="/static/js/jquery-3.6.0.min.js"></script>
+	<script src="/static/js/qrcode.min.js"></script>
+	<script src="/static/js/html5-qrcode.min.js"></script>
+	<script src="/static/js/script.js"></script>
 
 	<script type="text/javascript">
+
+		const BASE_URL = "{{ base_url }}";
 
 		const getPassword = () => {
 			return $("#password").val();

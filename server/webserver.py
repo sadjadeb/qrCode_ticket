@@ -35,7 +35,12 @@ def has_permission(password: str):
         return True
 
 
-@app.get("/", response_class=HTMLResponse)
+@app.get("/")
+async def root():
+    return {"message": "Server is running"}
+
+
+@app.get("/ticket/{ticket_id}", response_class=HTMLResponse)
 async def root(request: Request, ticket_id: int):
     return templates.TemplateResponse("index.html", {"request": request,
                                                      "ticket_id": ticket_id,
@@ -44,13 +49,13 @@ async def root(request: Request, ticket_id: int):
                                                      "event_name": EVENT_NAME})
 
 
-@app.get("/ticket/all")
+@app.get("/api/ticket/all")
 async def read_all_items(password: Optional[str] = None):
     if has_permission(password):
         return users
 
 
-@app.get("/ticket/{ticket_id}")
+@app.get("/api/ticket/{ticket_id}")
 async def read_items(ticket_id: int):
     for user in users:
         if user['ticket_id'] == ticket_id:
@@ -61,10 +66,11 @@ async def read_items(ticket_id: int):
 @app.get("/reception", response_class=HTMLResponse)
 async def reception_page(request: Request):
     return templates.TemplateResponse("reception.html", {"request": request,
+                                                         "base_url": DOMAIN_NAME,
                                                          "page_title": PAGE_TITLE})
 
 
-@app.get("/reception/{ticket_id}")
+@app.get("/api/reception/{ticket_id}")
 async def verify_ticket(ticket_id: int, password: Optional[str] = None):
     if has_permission(password):
         for user in users:
@@ -79,12 +85,6 @@ async def verify_ticket(ticket_id: int, password: Optional[str] = None):
                     'last_name': user['last_name'],
                     'entrance_count': users_entrance[ticket_id]
                 }
-
-
-@app.get("/camera")
-async def has_camera_permission(password: Optional[str] = None):
-    if has_permission(password):
-        return {'has_camera_perm': True}
 
 
 def run_server():

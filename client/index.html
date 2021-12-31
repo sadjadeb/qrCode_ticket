@@ -5,10 +5,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>{{ page_title }}</title>
 
-	<link rel="stylesheet" href="static/css/bootstrap-reboot.rtl.min.css">
-	<link rel="stylesheet" href="static/css/bootstrap-grid.rtl.min.css">
-	<link rel="stylesheet" href="static/css/bootstrap-utilities.rtl.min.css">
-	<link rel="stylesheet" href="static/css/style.css">
+	<link rel="stylesheet" href="/static/css/bootstrap-reboot.rtl.min.css">
+	<link rel="stylesheet" href="/static/css/bootstrap-grid.rtl.min.css">
+	<link rel="stylesheet" href="/static/css/bootstrap-utilities.rtl.min.css">
+	<link rel="stylesheet" href="/static/css/style.css">
 </head>
 <body>
 
@@ -16,12 +16,12 @@
 		<div class="row justify-content-between align-items-center">
 			<div class="col-4">
 				<div class="logo">
-					<img src="static/img/logo1.png" alt="LOGO 1">
+					<img src="/static/img/logo1.png" alt="LOGO 1">
 				</div>
 			</div>
 			<div class="col-4">
 				<div class="logo ms-auto">
-					<img src="static/img/logo2.png" alt="LOGO 2">
+					<img src="/static/img/logo2.png" alt="LOGO 2">
 				</div>
 			</div>
 		</div>
@@ -47,16 +47,16 @@
 		</div>
 	</div>
 
-	<script src="static/js/jquery-3.6.0.min.js"></script>
-	<script src="static/js/qrcode.min.js"></script>
-	<script src="static/js/script.js"></script>
+	<script src="/static/js/jquery-3.6.0.min.js"></script>
+	<script src="/static/js/qrcode.min.js"></script>
+	<script src="/static/js/script.js"></script>
 
 	<script type="text/javascript">
 
-		const BASE_URL = "http://127.0.0.1:8000";
+		const BASE_URL = "{{ base_url }}";
 
 		function get_ticket(ticket_id) {
-			return $.get(`${BASE_URL}/ticket/${ticket_id}`).then(res => {
+			return $.get(`${BASE_URL}/api/ticket/${ticket_id}`).then(res => {
 				$("#user-name").html(`${res.first_name} ${res.last_name}`);
 				$("#ticket-id").html(`${res.ticket_id}`);
 				$("#phone-number").html(res.phone_number);
@@ -65,19 +65,16 @@
 		}
 
 		$(() => {
-			var urlParams = new URLSearchParams(window.location.search);
-			if(urlParams.has('ticket_id')) {
-				const ticket_id = urlParams.get('ticket_id');
+				const ticket_id = "{{ ticket_id }}";
 				get_ticket(ticket_id).then(res => {
 					new QRCode(document.getElementById("qrcode"), {
-						text: `${BASE_URL}/reception/${ticket_id}`,
+						text: `${BASE_URL}/ticket/${ticket_id}`,
 						width: 120,
 						height: 120
 					});
 				}).fail(err => {
 					$(".main").addClass('error');
 				})
-			}
 		})
 	</script>
 </body>
