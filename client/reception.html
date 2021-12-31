@@ -30,11 +30,11 @@
 		}
 
 		const reserveTicket = ticket_id => {
-			return $.get(`${BASE_URL}/ticket/${ticket_id}/reserve?password=${getPassword()}`).then(res => {
-				alert(`میهمان ${res.first_name} ${res.last_name} با کد بلیت ${ticket_id} وارد شد.`);
+			$.get(`${BASE_URL}/api/reception/${ticket_id}?password=${getPassword()}`).then(res => {
+				alert(`میهمان ${res.first_name} ${res.last_name} با کد بلیت ${ticket_id} برای بار ${res.entrance_count} وارد شد. `);
 				return res;
 			}).fail(res => {
-				alert('خطا در رزرو بلیت');
+				alert('بلیت نامعتبر است.');
 			})
 		}
 
