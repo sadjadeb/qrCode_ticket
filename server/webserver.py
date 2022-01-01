@@ -1,17 +1,20 @@
-from server.config import *
-from server.excel_handler import get_users_from_excel
+from config import *
+from excel_handler import get_users_from_excel
 from fastapi import FastAPI, HTTPException, status, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from typing import Optional
+import pathlib
 import uvicorn
 
 app = FastAPI()
 
-app.mount("/static", StaticFiles(directory="client/static"), name="static")
-templates = Jinja2Templates(directory="client")
+client_path = pathlib.Path(__file__).parent.resolve().parent.resolve() / 'client'
+static_path = pathlib.Path(__file__).parent.resolve().parent.resolve() / 'client/static'
+app.mount("/static", StaticFiles(directory=static_path), name="static")
+templates = Jinja2Templates(directory=client_path)
 
 origins = ["*"]
 app.add_middleware(
@@ -88,4 +91,4 @@ async def verify_ticket(ticket_id: int, password: Optional[str] = None):
 
 
 def run_server():
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+    uvicorn.run(app, host="127.0.0.1", port=8000)
