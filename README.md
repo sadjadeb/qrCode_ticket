@@ -37,6 +37,28 @@ pip install -r requirements.txt
 \
 Rename sample_config to config and replace mock data with valid ones
 
+Your Excel file must be formatted as follows:
+
+| first_name | last_name | phone_number |
+|------------|-----------|--------------|
+| Sajad      | Ebrahimi  | 09151111111  |
+| Alireza    | Hooshyar  | 09152222222  |
+| ...        | ...       | ...          |
+
+Run the following command to add ticket ids and links for registered users
+
+```bash
+python main.py generate_ticket_link
+```
+
+After that you have an Excel file named `output.xlsx` at the OUTPUT_FILE_PATH formatted as follows:
+
+| first_name | last_name | phone_number | ticket_id | ticket_link |
+|------------|-----------|--------------|-----------|-------------|
+| Sajad      | Ebrahimi  | 09151111111  | 165153    | https://... |
+| Alireza    | Hooshyar  | 09152222222  | 895232    | https://... |
+| ...        | ...       | ...          | ...       | ...         |
+
 ## Run
 
 Run the following command to start the webserver
@@ -45,16 +67,11 @@ Run the following command to start the webserver
 python main.py run_webserver
 ```
 
-Run the following command to add ticket ids and links for registered users
-
-```bash
-python main.py generate_ticket_link
-```
-
 \
 Now open the base_url/ticket/ticket_id to see the ticket
 
-For the receptionist, get the /reception endpoint and enter the password to open the QR code reader and verify the ticket
+For the receptionist, get the /reception endpoint and enter the password to open the QR code reader and verify the
+ticket
 
 ## Contributing
 
