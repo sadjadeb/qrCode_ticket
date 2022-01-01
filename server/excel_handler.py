@@ -53,6 +53,6 @@ def generate_ticket_link(input_file_path, output_file_path, base_url):
         output_ws.cell(row=i, column=2).value = input_ws.cell(row=i, column=2).value
         output_ws.cell(row=i, column=3).value = input_ws.cell(row=i, column=3).value
         output_ws.cell(row=i, column=4).value = ticket_id
-        output_ws.cell(row=i, column=5).value = base_url + '/?ticket_id=' + str(ticket_id)
+        output_ws.cell(row=i, column=5).value = base_url + '/ticket/' + str(ticket_id)
 
     output_wb.save(output_file_path)
