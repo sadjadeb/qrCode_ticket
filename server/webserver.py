@@ -11,10 +11,9 @@ import uvicorn
 
 app = FastAPI()
 
-client_path = pathlib.Path(__file__).parent.resolve().parent.resolve() / 'client'
-static_path = pathlib.Path(__file__).parent.resolve().parent.resolve() / 'client/static'
-app.mount("/static", StaticFiles(directory=static_path), name="static")
-templates = Jinja2Templates(directory=client_path)
+templates_path = pathlib.Path(__file__).parent.resolve().parent.resolve() / 'templates'
+templates = Jinja2Templates(directory=templates_path)
+app.mount("/static", StaticFiles(directory=templates_path / 'static'), name="static")
 
 origins = ["*"]
 app.add_middleware(
