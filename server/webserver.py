@@ -43,12 +43,12 @@ async def root():
 
 
 @app.get("/ticket/{ticket_id}", response_class=HTMLResponse)
-async def root(request: Request, ticket_id: int):
-    return templates.TemplateResponse("index.html", {"request": request,
-                                                     "ticket_id": ticket_id,
-                                                     "base_url": DOMAIN_NAME,
-                                                     "page_title": PAGE_TITLE,
-                                                     "event_name": EVENT_NAME})
+async def ticket(request: Request, ticket_id: int):
+    return templates.TemplateResponse("ticket.html", {"request": request,
+                                                      "ticket_id": ticket_id,
+                                                      "base_url": DOMAIN_NAME,
+                                                      "page_title": PAGE_TITLE,
+                                                      "event_name": EVENT_NAME})
 
 
 @app.get("/api/ticket/all")
