@@ -37,9 +37,10 @@ def has_permission(password: str):
         return True
 
 
-@app.get("/")
-async def root():
-    return {"message": "Server is running"}
+@app.get("/", response_class=HTMLResponse)
+async def root(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request,
+                                                     "page_title": PAGE_TITLE})
 
 
 @app.get("/ticket/{ticket_id}", response_class=HTMLResponse)
@@ -54,7 +55,7 @@ async def ticket(request: Request, ticket_id: int):
 @app.get("/api/ticket/all")
 async def read_all_items(password: Optional[str] = None):
     if has_permission(password):
-        return users
+        return users_entrance, users
 
 
 @app.get("/api/ticket/{ticket_id}")
