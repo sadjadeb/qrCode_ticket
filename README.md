@@ -26,6 +26,7 @@ cd qrCode_ticket/
 sudo apt-get install virtualenv
 virtualenv venv
 source venv/bin/activate
+cd src/
 ```
 
 Install required libraries

@@ -1,7 +1,7 @@
 /.idea/
 /venv/
-/server/__pycache__/
-/server/config.py
+/src/__pycache__/
+/src/config.py
 /sample_users.xlsx
 /users.xlsx
 /templates/static/img/poster.jpg
