@@ -36,7 +36,7 @@ pip install -r requirements.txt
 ```
 
 \
-Rename sample_config to config and replace mock data with valid ones
+**Don't forget to rename sample_config to config and replace mock data with valid ones**
 
 Your Excel file must be formatted as follows:
 
@@ -60,6 +60,25 @@ After that you have an Excel file named `output.xlsx` at the OUTPUT_FILE_PATH fo
 | Alireza    | Hooshyar  | 09152222222  | 895232    | https://... |
 | ...        | ...       | ...          | ...       | ...         |
 
+For easy sharing of the links, they stored in a separate column named `ticket_link`
+
+#### config Nginx to serve the ticket links
+```bash
+sudo nano /etc/nginx/sites-enabled/ticket
+```
+
+then paste the following:
+```
+server {
+    server_name <DOMAIN_NAME>;
+    
+    location / {
+        proxy_pass http://localhost:8000;
+    }
+}
+```
+
+
 ## Run
 
 Run the following command to start the webserver
@@ -68,11 +87,19 @@ Run the following command to start the webserver
 python main.py run_webserver
 ```
 
-\
-Now open the base_url/ticket/ticket_id to see the ticket
+#### User
+Open the base_url/ticket/ticket_id to see the ticket
 
+#### Receptionist
 For the receptionist, get the /reception endpoint and enter the password to open the QR code reader and verify the
 ticket
+
+#### root path
+Put your event's poster in /templates/static/img/poster.jpg
+
+Open the base_url/ to see the poster
+
+#### 
 
 ## Contributing
 
